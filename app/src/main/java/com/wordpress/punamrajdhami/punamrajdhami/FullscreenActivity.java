@@ -2,14 +2,9 @@ package com.wordpress.punamrajdhami.punamrajdhami;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -127,8 +121,8 @@ public class FullscreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.registerReceiver(this.mConnReceiver,
-                new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        /*this.registerReceiver(this.mConnReceiver,
+                new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));*/
         setContentView(R.layout.activity_fullscreen);
 
         mVisible = true;
@@ -257,7 +251,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    private BroadcastReceiver mConnReceiver = new BroadcastReceiver() {
+    /*private BroadcastReceiver mConnReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             boolean noConnectivity = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
             String reason = intent.getStringExtra(ConnectivityManager.EXTRA_REASON);
@@ -267,11 +261,13 @@ public class FullscreenActivity extends AppCompatActivity {
             NetworkInfo otherNetworkInfo = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
 
             if(currentNetworkInfo.isConnected()){
-                Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
-
+//                finish();
+                startActivity(getIntent());
+//                Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
+                Log.d("Inside is connected", "inside connected");
             }else{
-                Toast.makeText(getApplicationContext(), "Not Connected", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Not Connected", Toast.LENGTH_LONG).show();
             }
         }
-    };
+    };*/
 }
